@@ -7,8 +7,17 @@
       <section class="player">
         <h2 class="song-title">{{ current.title }} - <span>{{ current.artist }}</span></h2>
         <div>
-          
+          <button class="prev" @click="prev">Prev</button>
+          <button class="play" v-if="!isPlaying" @click="play">Play</button>
+          <button class="pause" v-else @click="pause">Pause</button>
+          <button class="next" @click="next">Next</button>
         </div>
+      </section>
+      <section class="playlist">
+        <h3>The playlist</h3>
+        <button v-for="song in songs" :key="song.src" @click="play(song)" :class="(song.src == current.src) ? 'song playing' : 'song'">
+          {{ song.title }} - {{ song.title }}
+        </button>
       </section>
     </main>
   </div>
@@ -22,6 +31,7 @@ export default {
     return {
       current: {},
       index: 0,
+      isPlaying: false,
       songs: [
         {
           title: 'Monster',
@@ -35,6 +45,36 @@ export default {
         }
       ],
       player: new Audio()
+    }
+  },
+  methods: {
+    play (song) {
+      if (typeof song.src != "undefined") {
+        this. current = song;
+        this.player.src = this.current.src;
+      }
+      this.player.play();
+      this.isPlaying = true;
+    },
+    pause () {
+      this.player.pause();
+      this.isPlaying = true;
+    },
+    next () {
+      this.index++;
+      if (this.index > this.songs.length - 1) {
+        this.index = 0;
+      }
+      this.current = this.songs[this.index];
+      this.play(this.current);
+    },
+    prev () {
+      this.index--;
+      if (this.index < 0 ) {
+        this.index = this.songs.length - 1;
+      }
+      this.current = this.songs[this.index];
+      this.play(this.current);
     }
   },
   created () {
@@ -61,5 +101,8 @@ header {
   padding: 15px;
   background-color: #212121;
   color: #ffffff;
+}
+main {
+  
 }
 </style>
