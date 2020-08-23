@@ -1,4 +1,4 @@
-# spotif
+# Music_App
 
 ## Project setup
 ```
