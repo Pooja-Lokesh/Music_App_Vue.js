@@ -6,7 +6,7 @@
     <main>
       <section class="player">
         <h2 class="song-title">{{ current.title }} - <span>{{ current.artist }}</span></h2>
-        <div>
+        <div class="controls">
           <button class="prev" @click="prev">Prev</button>
           <button class="play" v-if="!isPlaying" @click="play">Play</button>
           <button class="pause" v-else @click="pause">Pause</button>
@@ -54,6 +54,14 @@ export default {
         this.player.src = this.current.src;
       }
       this.player.play();
+      this.player.addEventListener('ended', function () {
+        this.index++;
+        if (this.index > this.songs.length - 1) {
+        this.index = 0;
+      }
+      this.current = this.songs[this.index];
+      this.play(this.current);
+      }).bind(this);
       this.isPlaying = true;
     },
     pause () {
@@ -103,6 +111,82 @@ header {
   color: #ffffff;
 }
 main {
-  
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 25px;
+}
+.song-title {
+  color: #53565A;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+.song-title span {
+  font-weight: 400;
+  font-style: italic;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+  align-items: center;
+}
+button {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: none;
+}
+button:hover {
+  opacity: 0.8;
+}
+.play .pause {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 15px 25px;
+  margin: 0px 15px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #cc2e5d;
+}
+.next .prev {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin: 0px 15px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #ff5858;
+}
+.playlist {
+  padding: 0px 30px;
+}
+.playlist h3 {
+  color: #212121;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.playlist .song {
+  display: black;
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.playlist .song:hover {
+  color: #ff5858;
+}
+.playlist .song.playing {
+  color:#ffffff;
+}
+.playlist .song.playing {
+  color: #ffffff;
+  background-image: linear-gradient(to right, #cc2e5d, #ff5858);
 }
 </style>
