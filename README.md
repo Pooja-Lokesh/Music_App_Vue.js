@@ -1,8 +1,6 @@
 # Music_App
 
-## Project setup
-
-A music playing web app using Vue.js
+## A music playing web app using Vue.js
 
 Features : 
 ```
