@@ -1,23 +1,16 @@
-# spotif
+# Music_App
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+A music playing web app using Vue.js
 
-### Compiles and minifies for production
+Features : 
 ```
-npm run build
-```
+1. Play
+2. Pause
+3. Next
+4. Previous
 
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration
